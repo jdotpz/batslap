@@ -1,3 +1,3 @@
 # BATSLAP
 
-under early development. check back later.
+[demo](http://curlee.github.io/batslap/demo/)
