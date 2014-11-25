@@ -123,5 +123,5 @@ gulp.task 'cleanup', ->
 
 # deploy front-end to gh-pages
 gulp.task 'ghdeploy', ->
-  return gulp.src "#{dirs.dist}", { push:true }
+  return gulp.src "#{dirs.dist}/**/*", { push:true }
   .pipe deploy cacheDir: 'deploy_cache'
