@@ -21,7 +21,6 @@ class Batslap
         font-family: 'unmasked';\
         src: url('data:font/opentype;base64,#{fnt}');\
       }"
-    console.log style
 
     $('head').append style
     insertCss css
