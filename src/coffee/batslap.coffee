@@ -29,7 +29,8 @@ class Batslap
       $obj = $(container)
       data = $obj.data()
 
-      $obj.css 'background-image', 'url(data:image/jpeg;base64,' + img
+      $obj.css 'background-image', 'url(data:image/jpeg;base64,' + img + ')'
+      console.log img
 
       $obj.append @dialog(data.r, 'rbn')
       $obj.append @dialog(data.b, 'btmn')
