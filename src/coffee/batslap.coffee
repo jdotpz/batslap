@@ -4,6 +4,8 @@ fs = require 'fs'
 
 css = fs.readFileSync __dirname + '/../../dist/batslap.css', 'utf8'
 img = fs.readFileSync __dirname + '/../img/batslap.jpg', 'base64'
+balloonA = fs.readFileSync __dirname + '/../img/rbn.jpg', 'base64'
+balloonB = fs.readFileSync __dirname + '/../img/bmn.gif', 'base64'
 
 fnt = fs.readFileSync(
   __dirname + '/../fonts/unmaskedbb_ot/UnmaskedBB.otf'
@@ -30,7 +32,22 @@ class Batslap
       data = $obj.data()
 
       $obj.css 'background-image', 'url(data:image/jpeg;base64,' + img + ')'
-      console.log img
+
+      if data.r?
+        wordballoonA = $ '<span>',
+          class: 'wordballoon wordballoon-rbn'
+        wordballoonA.css(
+          'background-image', 'url(data:image/jpeg;base64,' + balloonA + ')'
+        )
+        $obj.append wordballoonA
+
+      if data.b?
+        wordballoonB = $ '<span>',
+          class: 'wordballoon wordballoon-bmn'
+        wordballoonB.css(
+          'background-image', 'url(data:image/jpeg;base64,' + balloonB + ')'
+        )
+        $obj.append wordballoonB
 
       $obj.append @dialog(data.r, 'rbn')
       $obj.append @dialog(data.b, 'btmn')
