@@ -12,6 +12,16 @@ fnt = fs.readFileSync(
   'base64'
 )
 
+fnt_b = fs.readFileSync(
+  __dirname + '/../fonts/unmaskedbb_ot/UnmaskedBB_bold.otf'
+  'base64'
+)
+
+fnt_i = fs.readFileSync(
+  __dirname + '/../fonts/unmaskedbb_ot/UnmaskedBB_ital.otf'
+  'base64'
+)
+
 class Batslap
   constructor: ->
     batslaps = $ '.batslap'
@@ -22,8 +32,15 @@ class Batslap
       @font-face {\
         font-family: 'unmasked';\
         src: url('data:font/opentype;base64,#{fnt}');\
+      }
+      @font-face {\
+        font-family: 'unmasked-bold';\
+        src: url('data:font/opentype;base64,#{fnt_b}');\
+      }
+      @font-face {\
+        font-family: 'unmasked-ital';\
+        src: url('data:font/opentype;base64,#{fnt_i}');\
       }"
-
     $('head').append style
     insertCss css
     
@@ -49,19 +66,25 @@ class Batslap
         )
         $obj.append wordballoonB
 
-      $obj.append @dialog(data.r, 'rbn')
-      $obj.append @dialog(data.b, 'btmn')
+      $obj.append @dialog(data.r, 'rbn', data.style)
+      $obj.append @dialog(data.b, 'btmn', data.style)
 
-  dialog: (txt, className)->
-    s = $ '<span>',
-      text: txt
+  dialog: (txt, className, style)->
+    if txt
+      strong = /\*\*(.+)\*\*/
+      em = /\*(.+)\*/
+      txt = txt.replace strong, '<strong>$1</strong>'
+      txt = txt.replace em, '<em>$1</em>'
 
-    obj = $ '<p>',
-      attr:
-        class: className
-      html: s
+      s = $ '<span>',
+        html: txt
 
-    return obj
+      obj = $ '<p>',
+        attr:
+          class: className
+        html: s
+
+      return obj
 
 batslap = new Batslap
 
