@@ -12,5 +12,5 @@ The meme came from the interwebs in 2008:
 
 ![meme](src/img/meme.jpg)
 
-Take a look at the [demo]((http://curlee.github.io/batslap/demo/)) for example
+Take a look at the [demo](http://curlee.github.io/batslap/demo/) for example
 usage.
