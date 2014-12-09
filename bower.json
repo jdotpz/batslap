@@ -1,0 +1,21 @@
+{
+  "name": "batslap",
+  "version": "0.1.0",
+  "homepage": "https://github.com/curlee/batslap",
+  "authors": [
+    "Joe Curlee <joe.curlee@gmail.com>"
+  ],
+  "description": "Allows you to embed a dynamic version of the \"my parents are dead\" meme on your site.",
+  "main": "dist/batslap.min.js",
+  "keywords": [
+    "batslap", "my parents are dead", "meme"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
