@@ -1,7 +1,7 @@
 {
-  "name": "BATSLAP",
+  "name": "batslap",
   "version": "0.1.0",
-  "description": "\"Don't tell me I'm wrong, you brat...\"",
+  "description": "Allows you to embed a dynamic version of the \"my parents are dead\" meme on your site.",
   "main": "dist/batslap.min.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -11,7 +11,7 @@
     "url": "https://github.com/curlee/batslap"
   },
   "keywords": [
-    "Batslap"
+    "batslap", "my parents are dead", "meme"
   ],
   "author": "Joe Curlee",
   "license": "MIT",
