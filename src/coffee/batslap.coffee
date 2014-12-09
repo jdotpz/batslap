@@ -66,25 +66,30 @@ class Batslap
         )
         $obj.append wordballoonB
 
-      $obj.append @dialog(data.r, 'rbn', data.style)
-      $obj.append @dialog(data.b, 'btmn', data.style)
+      $obj.append @dialog(data.r, 'rbn')
+      $obj.append @dialog(data.b, 'btmn')
 
-  dialog: (txt, className, style)->
+  dialog: (txt, className)->
+    txt = @parse txt
+
+    s = $ '<span>',
+      html: txt
+
+    obj = $ '<p>',
+      attr:
+        class: className
+      html: s
+
+    return obj
+
+  parse: (txt)->
     if txt
       strong = /\*\*(.+)\*\*/
       em = /\*(.+)\*/
       txt = txt.replace strong, '<strong>$1</strong>'
       txt = txt.replace em, '<em>$1</em>'
+    return txt
 
-      s = $ '<span>',
-        html: txt
-
-      obj = $ '<p>',
-        attr:
-          class: className
-        html: s
-
-      return obj
 
 batslap = new Batslap
 
