@@ -116,7 +116,6 @@ gulp.task 'cleanup', ->
   del [
     "#{dirs.dist}/*.jpg"
     "#{dirs.dist}/fonts"
-    "#{dirs.dist}/batslap.js"
     "#{dirs.dist}/batslap.min.css"
     "#{dirs.dist}/batslap.css"
   ]
