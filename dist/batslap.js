@@ -9216,7 +9216,7 @@ return jQuery;
 
 },{}],3:[function(require,module,exports){
 (function() {
-  var $, Batslap, balloonA, balloonB, batslap, css, fnt, fnt_b, fnt_i, fs, img, insertCss;
+  var $, Batslap, balloonA, balloonB, css, fnt, fnt_b, fnt_i, fs, img, insertCss;
 
   $ = require('jquery');
 
@@ -9301,7 +9301,7 @@ return jQuery;
 
   })();
 
-  batslap = new Batslap;
+  window.batslap = new Batslap;
 
   module.exports = Batslap;
 

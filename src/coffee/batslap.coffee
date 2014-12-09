@@ -91,6 +91,6 @@ class Batslap
     return txt
 
 
-batslap = new Batslap
+window.batslap = new Batslap
 
 module.exports = Batslap
