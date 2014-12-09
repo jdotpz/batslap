@@ -1,6 +1,6 @@
 {
   "name": "batslap",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "homepage": "https://github.com/curlee/batslap",
   "authors": [
     "Joe Curlee <joe.curlee@gmail.com>"
@@ -13,9 +13,16 @@
   "license": "MIT",
   "ignore": [
     "**/.*",
+    ".gitignore",
+    "Gulpfile.js",
+    "README.md",
+    "bower.json",
+    "deploy_cache",
+    "dist/demo",
+    "gulpfile.coffee",
     "node_modules",
+    "package.json",
     "bower_components",
-    "test",
-    "tests"
+    "src"
   ]
 }
