@@ -14,7 +14,7 @@
     "batslap", "my parents are dead", "meme"
   ],
   "author": "Joe Curlee",
-  "license": "MIT",
+  "license": "",
   "devDependencies": {
     "base64": "^2.1.0",
     "brfs": "^1.2.0",
