@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>BATSLAP!</title>
+    <link rel="stylesheet" href="batslap.min.css">
+    <link rel="stylesheet" href="demo.min.css">
+  </head>
+  <body>
+    <div class="container">
+      <h1>BATSLAP!</h1>
+      <p>
+        Insert the following somewhere within <code>&lt;body&gt;</code>
+      </p>
+      <pre>
+        <code>
+          &lt;div
+            class    = "batslap batslap-sm"
+            data-rbn = "I found this **DMCA takedown notice** in the mail and --"
+            data-bmn = "**I'm Batman!**"&gt;
+          &lt;/div&gt;
+        </code>
+      </pre>
+      <p>
+        Insert the following code just before the closing
+        <code>&lt;/head&gt;</code> tag.
+      </p>
+      <pre>
+        <code>
+          &lt;link rel="stylesheet" href="batslap.min.css"&gt;
+        </code>
+      </pre>
+      <p>
+        Insert the following just before the closing
+        <code>&lt;/body&gt;</code> tag.
+      </p>
+      <pre>
+        <code>
+          &lt;script type="text/javascript" src="batslap.min.js"&gt;&lt;/script&gt;
+        </code>
+      </pre>
+      <p>
+        The result
+      </p>
+      <div
+        class="batslap batslap-sm"
+        data-rbn="I found this **DMCA takedown notice** in the mail and --"
+        data-bmn="**I'm Batman!**">
+      </div>
+      <p>
+        Surround your text with two *'s for **<strong>bold</strong>** text or 1 * for *<em>Italics</em>*.
+      </p>
+      <hr>
+      <p>
+        <strong>Want a larger version?</strong> Don't use the <em>batslap-sm</em> class.
+      </p>
+      <pre>
+        <code>
+          &lt;div
+            class    = "batslap"
+            data-rbn = "I found this DMCA takedown notice in the mail and --"
+            data-bmn = "I'm Batman!"&gt;
+          &lt;/div&gt;
+        </code>
+      </pre>
+      <div
+        class="batslap"
+        data-rbn="I found this DMCA takedown notice in the mail and --"
+        data-bmn="I'm Batman!">
+      </div>
+      <hr>
+      <p>
+        <strong>Only one character talking...</strong>
+      </p>
+      <pre>
+        <code>
+          &lt;div
+            class    = "batslap"
+            data-rbn = "Batman, *I love you* --"&gt;
+          &lt;/div&gt;
+        </code>
+      </pre>
+      <div
+        class="batslap"
+        data-rbn="Batman, *I love you* --">
+      </div>
+      <hr>
+      <p><strong>Change the Boy Wonder's dialog</strong></p>
+      <pre>
+        <code>
+          window.Batslap.rtalk(string[, index]);
+        </code>
+      </pre>
+      
+      <p><strong>Change the Caped Crusader's dialog</strong></p>
+      <pre>
+        <code>
+          window.Batslap.btalk(string[, index]);
+        </code>
+      </pre>
+
+      <table>
+        <tbody>
+          <tr>
+            <td><strong>String</strong></td>
+            <td>string literal. Pass an empty string to remove balloon.</td>
+          </tr>
+          <tr>
+            <td><strong>Index</strong></td>
+            <td>Integer representing an index starting at 0. Leave blank to
+            change all instances.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <strong>Examples:</strong>
+      <pre>
+        <code>
+          window.Batslap.rtalk('*Hey batman, what are you getting your parents for christ-*');
+          window.Batslap.btalk('*My parents are **deeaaaaaaad!!!***');
+        </code>
+      </pre>
+      <button class="change">Change all elements</button>
+
+      <pre>
+        <code>
+          window.Batslap.rtalk('*This is the first instance of --*', 0);
+          window.Batslap.btalk('**Shut up!**', 0);
+        </code>
+      </pre>
+      <button class="change-first">Change first element</button>
+
+      <pre>
+        <code>
+          window.Batslap.btalk('', 2);
+        </code>
+      </pre>
+      <button class="remove-text">Remove text on last element</button>
+    </div>
+    <script type="text/javascript" src="batslap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
+    <script type="text/javascript" charset="utf-8">
+      $(document).ready(function () {
+        $('.change').on('click', function () {
+          window.Batslap.rtalk('*Hey batman, what are you getting your parents for christ-*');
+          window.Batslap.btalk('*My parents are **deeaaaaaaad!!!***');
+        });
+
+        $('.change-first').on('click', function () {
+          window.Batslap.rtalk('*This is the first instance of --*', 0);
+          window.Batslap.btalk('**Shut up!**', 0);
+        });
+
+        $('.remove-text').on('click', function () {
+          window.Batslap.btalk('', 2);
+        });
+      });
+    </script>
+  </body>
+</html>
