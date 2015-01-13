@@ -1,6 +1,5 @@
 var fs = require('fs');
 var gulp = require('gulp');
-var path = require('path');
 var less = require('gulp-less');
 var uglify = require('gulp-uglify');
 var base64 = require('gulp-base64');
