@@ -1,3 +1,6 @@
+@gray: #d2d2d2;
+@lightGray: #e6e6e6;
+
 * {
   margin: 0;
   padding: 0;
@@ -28,7 +31,32 @@ p {
 hr {
   border: 0;
   height: 0;
-  border-top: 1px solid rgba(0, 0, 0, 0.1);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+  border-bottom: 1px solid @lightGray;
   margin: 40px 0;
+}
+
+table {
+  border: 1px solid @gray;
+  border-spacing: 0;
+  border-collapse: separate;
+  margin-bottom: 20px;
+  td {
+    padding: 5px;
+    border-bottom: 1px solid @gray;
+    border-right: 1px solid @gray;
+    &:last-child {
+      border-right: none;
+    }
+    vertical-align: top;
+  }
+  tr:last-child td {
+    border-bottom: none;
+  }
+}
+
+pre {
+  padding-top: 10px;
+  margin: 20px 0;
+  border: 1px solid @lightGray;
+  overflow: auto;
 }
