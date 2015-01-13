@@ -7,7 +7,6 @@ var base64 = require('gulp-base64');
 var minifyCSS = require('gulp-minify-css');
 var rename = require('gulp-rename');
 var deploy = require('gulp-gh-pages');
-var browserify = require('gulp-browserify');
 var del = require('del');
 
 var paths = {
@@ -29,7 +28,6 @@ gulp.task('clean', function (cb) {
 
 gulp.task('js', ['clean'], function () {
   gulp.src(paths.src.js)
-    .pipe(browserify({transform: ['brfs']}))
     .pipe(uglify())
     .pipe(rename('batslap.min.js'))
     .pipe(gulp.dest(paths.dist));
