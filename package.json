@@ -1,6 +1,6 @@
 {
   "name": "batslap",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "Allows you to embed a dynamic version of the \"my parents are dead\" meme on your site.",
   "main": "dist/batslap.min.js",
   "scripts": {

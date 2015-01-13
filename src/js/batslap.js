@@ -1,86 +1,95 @@
 'use strict';
 
-(function (window) {
+var Batslap = (function () {
   var instance;
 
-  var initialize = function () {
+  function initialize() {
     var elements = document.getElementsByClassName('batslap');
+    var dialogData = [];
 
     var i;
     for (i = 0; i < elements.length; i++) {
       addDialog(elements[i]);
     }
-  };
 
-  var addDialog = function (obj) {
-    var items = ['rbn', 'bmn'];
-    var item;
-    var data;
-    var i;
+    function addDialog (obj) {
+      var items = ['rbn', 'bmn'];
+      var item;
+      var data;
+      var i;
 
-    for (i = 0; i < items.length; i++) {
-      item = items[i];
-      data = obj.dataset[item];
-      if (data) {
-        setBalloon(obj, item, data);
+      for (i = 0; i < items.length; i++) {
+        item = items[i];
+        data = obj.dataset[item];
+        if (data) {
+          setBalloon(obj, item, data);
+        }
       }
     }
-  };
 
-  var setBalloon = function (item, className, data) {
-    var span = document.createElement('span');
-    span.className = 'wordballoon wordballoon-' + className;
+    function setBalloon (item, className, data) {
+      var span = document.createElement('span');
+      span.className = 'wordballoon wordballoon-' + className;
 
-    item.appendChild(
-      span
-    );
+      item.appendChild(
+        span
+      );
 
-    item.appendChild(
-      dialog(parseText(data), className)
-    );
-  };
-
-  var dialog = function (txt, className) {
-    var span = document.createElement('span');
-    span.innerHTML = txt;
-
-    var p = document.createElement('p');
-    p.className = className;
-    p.appendChild(span);
-    return p;
-  };
-
-  var parseText = function (txt) {
-    if (txt) {
-      return txt
-        .replace(/\*\*(.+)\*\*/, '<strong>$1</strong>')
-        .replace(/\*(.+)\*/, '<em>$1</em>');
+      item.appendChild(
+        dialog(parseText(data), className)
+      );
     }
-  };
 
-  var changeText = function (txt, className) {
-    var elements = document.getElementsByClassName(className);
-    var i;
-    var elems;
-    for (i = 0; i < elements.length; i++) {
-      elems = elements[i].getElementsByTagName('span');
-      elems[0].innerHTML = parseText(txt);
+    function dialog (txt, className) {
+      var span = document.createElement('span');
+      span.innerHTML = txt;
+
+      var p = document.createElement('p');
+      p.className = className;
+      p.appendChild(span);
+      return p;
     }
-  };
 
-  var Batslap = {
-    talk: changeText
-  };
+    function parseText (txt) {
+      if (txt) {
+        return txt
+          .replace(/\*\*(.+)\*\*/, '<strong>$1</strong>')
+          .replace(/\*(.+)\*/, '<em>$1</em>');
+      }
+    }
 
-  initialize();
+    function talk(txt, who, index) {
+      if (index) {
+        dialogData[index][who] = txt;
+      }
+      else {
+        var i;
+        for (i = 0; i < dialogData.length; i++) {
+          dialogData[i][who] = txt;
+        }
+      }
+    }
+
+    return {
+      rtalk: function (txt, index) {
+        talk(txt, 'rbn', index);
+      },
+
+      btalk: function (txt, index) {
+        talk(txt, 'bmn', index);
+      }
+    }
+  }
 
   return {
     getInstance: function () {
       if (!instance) {
-        instance = Batslap;
+        instance = initialize();
       }
       return instance;
     }
   }
 
-})(window);
+})();
+
+window.Batslap = Batslap.getInstance();
