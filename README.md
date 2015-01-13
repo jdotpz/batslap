@@ -12,7 +12,7 @@ The meme came from the interwebs in 2008:
 
 ![meme](src/imgs/meme.jpg)
 
-Take a look at the [demo](http://curlee.github.io/batslap/demo/) for example
+Take a look at the [demo](http://curlee.github.io/batslap/) for example
 usage.
 
 ## Installation
