@@ -30,7 +30,7 @@ gulp.task('clean', function (cb) {
 gulp.task('js', ['clean'], function () {
   gulp.src(paths.src.js)
     .pipe(browserify({transform: ['brfs']}))
-    //.pipe(uglify())
+    .pipe(uglify())
     .pipe(rename('batslap.min.js'))
     .pipe(gulp.dest(paths.dist));
 });

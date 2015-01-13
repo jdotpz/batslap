@@ -3,65 +3,67 @@
 var Batslap = (function () {
   var instance;
 
-  var $ = require('jquery');
+  var initialize = function () {
+    var elements = document.getElementsByClassName('batslap');
 
-  var Batslap = {
-    init: function () {
-      var obj;
-      var data;
-      var setBalloon = this.setBalloon;
-      var dialog = this.dialog;
-      var parseTxt = this.parse;
+    var i;
+    for (i = 0; i < elements.length; i++) {
+      addDialog(elements[i]);
+    }
+  }
 
-      $('.batslap').each(function (index, item) {
-        obj = $(item);
-        data = obj.data();
-
-        if (data.r) {
-          setBalloon(item, 'rbn');
-        }
-
-        if (data.b) {
-          setBalloon(item, 'bmn');
-        }
-
-        obj.append(
-          dialog(parseTxt(data.r), 'rbn')
+  var addDialog = function (obj) {
+    var items = ['rbn', 'bmn'];
+    var item;
+    var data;
+    var i;
+    
+    for (i = 0; i < items.length; i++) {
+      item = items[i];
+      data = obj.dataset[item];
+      if (data) {
+        setBalloon(obj, item);
+        obj.appendChild(
+          dialog(parseText(data), item)
         );
-
-        obj.append(
-          dialog(parseTxt(data.b), 'btmn')
-        );
-      });
-    },
-
-    setBalloon: function (item, className) {
-      $(item).append(
-        $('<span>', {
-          class: 'wordballoon wordballoon-' + className
-        })
-      );
-    },
-
-    dialog: function (txt, className) {
-      return $('<p>', {
-        attr: { class: className },
-        html: $('<span>', { html: txt })
-      });
-    },
-
-    parse: function (txt) {
-      if (txt) {
-        return txt
-          .replace(/\*\*(.+)\*\*/, '<strong>$1</strong>')
-          .replace(/\*(.+)\*/, '<em>$1</em>');
       }
     }
+  }
+
+  var setBalloon = function (item, className) {
+    var span = document.createElement('span');
+    span.className = 'wordballoon wordballoon-' + className;
+
+    item.appendChild(
+      span
+    );
+  }
+
+  var dialog = function (txt, className) {
+    var span = document.createElement('span');
+    span.innerHTML = txt;
+
+    var p = document.createElement('p');
+    p.className = className;
+    p.appendChild(span);
+    return p;
+  }
+
+  var parseText = function (txt) {
+    if (txt) {
+      return txt
+        .replace(/\*\*(.+)\*\*/, '<strong>$1</strong>')
+        .replace(/\*(.+)\*/, '<em>$1</em>');
+    }
+  }
+
+  var Batslap = {
   };
 
   return {
     getInstance: function () {
       if (!instance) {
+        initialize();
         instance = Batslap;
       }
       return instance;
@@ -71,4 +73,3 @@ var Batslap = (function () {
 })();
 
 window.bs = Batslap.getInstance();
-window.bs.init();
