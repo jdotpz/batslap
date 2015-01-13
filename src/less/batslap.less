@@ -1,24 +1,41 @@
+@font-face {
+  font-family: 'unmasked';
+  src: url('../fonts/unmaskedbb_ot/UnmaskedBB.otf');
+}
+
+@font-face {
+  font-family: 'unmasked-bold';
+  src: url('../fonts/unmaskedbb_ot/UnmaskedBB_bold.otf');
+}
+
+@font-face {
+  font-family: 'unmasked-ital';
+  src: url('../fonts/unmaskedbb_ot/UnmaskedBB_ital.otf');
+}
+
 .batslap {
   width: 600px;
   height: 580px;
-  background: center center no-repeat;
   position: relative;
+  background: url('../imgs/batslap.jpg') center center no-repeat;
 
   span.wordballoon {
     top: 0;
     position: absolute;
-  }
 
-  span.wordballoon-rbn {
-    left: 4px;
-    width: 316px;
-    height: 236px;
-  }
-  
-  span.wordballoon-bmn {
-    right: 0;
-    width: 305px;
-    height: 197px;
+    &.wordballoon-rbn {
+      left: 4px;
+      width: 316px;
+      height: 236px;
+      background: url('../imgs/rbn.jpg') left top no-repeat;
+    }
+
+    &.wordballoon-bmn {
+      right: 0;
+      width: 305px;
+      height: 197px;
+      background: url('../imgs/bmn.gif') left top no-repeat;
+    }
   }
 
   p {
@@ -52,15 +69,15 @@
     max-width: 50%;
     height: 125px;
     line-height: 125px;
-  }
-  
-  p.rbn {
-    left: 0;
-  }
 
-  p.btmn {
-    top: 0;
-    right: 0;
+    &.rbn {
+      left: 0;
+    }
+
+    &.btmn {
+      top: 0;
+      right: 0;
+    }
   }
 }
 
@@ -74,17 +91,19 @@
     line-height: 62px;
   }
 
-  span.wordballoon-rbn {
-    left: 2px;
-    width: 158px;
-    height: 118px;
-    background-size: 158px 118px;
-  }
-  
-  span.wordballoon-bmn {
-    right: 0;
-    width: 152px;
-    height: 98px;
-    background-size: 152px 98px;
+  span.wordballoon {
+    &.wordballoon-rbn {
+      left: 2px;
+      width: 158px;
+      height: 118px;
+      background-size: 158px 118px;
+    }
+    
+    &.wordballoon-bmn {
+      right: 0;
+      width: 152px;
+      height: 98px;
+      background-size: 152px 98px;
+    }
   }
 }

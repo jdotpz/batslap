@@ -1,89 +1,74 @@
 'use strict';
 
-define('Batslap',
-  [
-    '../html',
-    '../imgs',
-    '../fonts'
-  ],
-  function (html, imgs, fonts) {
-    var balloons = [
-      fs.readFileSync(
-        __dirname + '/../img/rbn.jpg',
-        'base64'
-      ),
-      fs.readFileSync(
-        __dirname + '/../img/bmn.gif',
-        'base64'
-      )
-    ];
+var Batslap = (function () {
+  var instance;
 
-    var mainImg = fs.readFileSync(
-      __dirname + '/../img/batslap.jpg',
-      'base64'
-    );
+  var $ = require('jquery');
 
-    var Batslap = {
-      init: function () {
-        var obj;
-        var data;
-        var setBalloon = this.setBalloon;
-        var dialog = this.dialog;
-        var parseTxt = this.parse;
+  var Batslap = {
+    init: function () {
+      var obj;
+      var data;
+      var setBalloon = this.setBalloon;
+      var dialog = this.dialog;
+      var parseTxt = this.parse;
 
-        $('.batslap').each(function (item) {
-          obj = $(item);
-          data = obj.data();
-          obj.css(
-            'background-image',
-            'url(data:image/jpeg;base64,' + mainImg + ')'
-          );
+      $('.batslap').each(function (index, item) {
+        obj = $(item);
+        data = obj.data();
 
-          if (data.r) {
-            setBalloon(item, balloons[0], 'rbn');
-          }
-
-          if (data.b) {
-            setBalloon(item, balloons[1], 'bmn');
-          }
-
-          obj.append(
-            dialog(parseTxt(data.r), 'rbn')
-          );
-
-          obj.append(
-            dialog(parseTxt(data.b), 'btmn')
-          );
-        });
-      },
-
-      setBalloon: function (item, img, className) {
-        $(item).append(
-          $('<span>', {
-            class: 'wordballoon wordballoon-' + className
-          })
-            .css(
-              'background-image',
-              'url(data:image/jpeg;base64,' + img + ')'
-            )
-        );
-      },
-
-      dialog: function (txt, className) {
-        return $('<p>', {
-          attr: { class: className },
-          html: $('<span>', { html: txt })
-        });
-      },
-
-      parse: function (txt){
-        if (txt) {
-          return txt
-            .replace(/\*\*(.+)\*\*/, '<strong>$1</strong>')
-            .replace(/\*(.+)\*/, '<em>$1</em>');
+        if (data.r) {
+          setBalloon(item, 'rbn');
         }
-      }
-    };
 
-    return Batslap;
-  });
+        if (data.b) {
+          setBalloon(item, 'bmn');
+        }
+
+        obj.append(
+          dialog(parseTxt(data.r), 'rbn')
+        );
+
+        obj.append(
+          dialog(parseTxt(data.b), 'btmn')
+        );
+      });
+    },
+
+    setBalloon: function (item, className) {
+      $(item).append(
+        $('<span>', {
+          class: 'wordballoon wordballoon-' + className
+        })
+      );
+    },
+
+    dialog: function (txt, className) {
+      return $('<p>', {
+        attr: { class: className },
+        html: $('<span>', { html: txt })
+      });
+    },
+
+    parse: function (txt) {
+      if (txt) {
+        return txt
+          .replace(/\*\*(.+)\*\*/, '<strong>$1</strong>')
+          .replace(/\*(.+)\*/, '<em>$1</em>');
+      }
+    }
+  };
+
+  return {
+    getInstance: function () {
+      if (!instance) {
+        instance = Batslap;
+      }
+      return instance;
+    }
+  }
+
+})();
+
+window.bs = Batslap.getInstance();
+window.bs.init();
