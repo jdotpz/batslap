@@ -6,11 +6,11 @@ versions of the "my parents are dead" meme on
 
 The original image comes from a panel in World's Finest #153
 
-![original](src/img/original.jpg)
+![original](src/imgs/original.jpg)
 
 The meme came from the interwebs in 2008:
 
-![meme](src/img/meme.jpg)
+![meme](src/imgs/meme.jpg)
 
 Take a look at the [demo](http://curlee.github.io/batslap/demo/) for example
 usage.
