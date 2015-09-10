@@ -7,25 +7,40 @@ var Batslap = (function () {
     var elements = document.getElementsByClassName('batslap');
     var dialogDom = [];
     var balloons = [];
+    var skipindex = [];
     var i;
 
-    // Create dom elements and load data.
-    for (i = 0; i < elements.length; i++) {
-      addDialog(elements[i], i);
+    // adds an array of indices to skip
+    function skipIndices(indices) {
+      skipindex = indices;
     }
 
-    // Adds a word balloon with dialog gathered from data attribute.
-    function addDialog(item, index) {
-      var classNames = ['rbn', 'bmn'];
-      var className;
-      var i;
-
-      for (i = 0; i < classNames.length; i++) {
-        className = classNames[i];
-
-        // Add a word balloon to the dom.
-        addBalloon(item, className, item.dataset[className], index);
+    // Parses text to add strong and emphasis tags.
+    function parseText(txt) {
+      if (txt) {
+        return txt
+          .replace(/\*\*(.+)\*\*/, '<strong>$1</strong>')
+          .replace(/\*(.+)\*/, '<em>$1</em>');
       }
+    }
+
+    // Adds text to dom.
+    function addText(txt, className, index) {
+      var span = document.createElement('span');
+
+      if (txt) {
+        span.innerHTML = txt;
+      }
+
+      if (!dialogDom[index]) {
+        dialogDom[index] = {};
+      }
+      dialogDom[index][className] = span;
+
+      var p = document.createElement('p');
+      p.className = className;
+      p.appendChild(span);
+      return p;
     }
 
     // Adds a word balloon to dom.
@@ -54,61 +69,24 @@ var Batslap = (function () {
       );
     }
 
-    // Adds text to dom.
-    function addText(txt, className, index) {
-      var span = document.createElement('span');
+    // Adds a word balloon with dialog gathered from data attribute.
+    function addDialog(item, index) {
+      var classNames = ['rbn', 'bmn'];
+      var className;
+      var n;
 
-      if (txt) {
-        span.innerHTML = txt;
+      for (n = 0; n < classNames.length; n++) {
+        className = classNames[n];
+
+        // Add a word balloon to the dom.
+        addBalloon(item, className, item.dataset[className], index);
       }
-
-      if (!dialogDom[index]) {
-        dialogDom[index] = {};
-      }
-      dialogDom[index][className] = span;
-
-      var p = document.createElement('p');
-      p.className = className;
-      p.appendChild(span);
-      return p;
-    }
-
-    // Parses text to add strong and emphasis tags.
-    function parseText(txt) {
-      if (txt) {
-        return txt
-          .replace(/\*\*(.+)\*\*/, '<strong>$1</strong>')
-          .replace(/\*(.+)\*/, '<em>$1</em>');
-      }
-    }
-
-    // Change text for all or one instance of batslap.
-    function talk(txt, className, index) {
-      var i;
-      var txt = parseText(txt);
-      var hide = (!txt) ? true : false;
-
-      if (index === false || index === undefined) {
-        for (i = 0; i < dialogDom.length; i++) {
-          changeText(txt, className, i, hide);
-        }
-      } else {
-        changeText(txt, className, index, hide);
-      }
-    }
-
-    function changeText(txt, className, index, hide) {
-      showHideBalloon(index, className, hide);
-      if (!txt) {
-        txt = '';
-      }
-      dialogDom[index][className].innerHTML = txt;
     }
 
     function showHideBalloon(index, className, hide) {
       var bclass = balloons[index][className].className.split(' ');
       for (i = 0; i < bclass.length; i++) {
-        if (bclass[i] == 'hide') {
+        if (bclass[i] === 'hide') {
           if (!hide) {
             bclass[i] = undefined;
           } else {
@@ -121,16 +99,57 @@ var Batslap = (function () {
         bclass.push('hide');
       }
 
-      balloons[index][className].className = bclass.join(' ');
+      // if this is not an index we should skip...
+      if (skipindex.indexOf(index) === -1) {
+        balloons[index][className].className = bclass.join(' ');
+      }
+    }
+
+    function changeText(txt, className, index, hide) {
+      showHideBalloon(index, className, hide);
+
+      if (!txt) {
+        txt = '';
+      }
+
+      // if this is not an index we should skip...
+      if (skipindex.indexOf(index) === -1) {
+        dialogDom[index][className].innerHTML = txt;
+      }
+    }
+
+    // Change text for all or one instance of batslap.
+    function talk(txt, className, index) {
+      var n;
+      txt = parseText(txt);
+      var hide = (!txt) ? true : false;
+
+      if (index === false || index === undefined || index === null) {
+        for (n = 0; n < dialogDom.length; n++) {
+          changeText(txt, className, n, hide);
+        }
+      } else {
+        changeText(txt, className, index, hide);
+      }
+    }
+
+    // Create dom elements and load data.
+    for (i = 0; i < elements.length; i++) {
+      addDialog(elements[i], i);
     }
 
     return {
       rtalk: function (txt, index) {
+        console.log(txt, index);
         talk(txt, 'rbn', index);
       },
 
       btalk: function (txt, index) {
         talk(txt, 'bmn', index);
+      },
+
+      skipIndices: function(indices) {
+        skipIndices(indices);
       }
     };
   }

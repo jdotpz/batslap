@@ -19,3 +19,23 @@ usage.
 ------
 
 `bower install batslap`
+
+## Dev
+------
+
+`npm install`
+
+### Build demo
+------
+
+`gulp build`
+
+or
+
+`gulp`
+
+Then open dist/index.html
+
+### Deploy to github pages
+
+`gulp ghdeploy`

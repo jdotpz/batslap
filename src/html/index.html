@@ -131,7 +131,7 @@
 
       <pre>
         <code>
-          window.Batslap.btalk('', 2);
+          window.Batslap.rtalk('', 2);
         </code>
       </pre>
       <button class="remove-text">Remove text on last element</button>
@@ -172,6 +172,8 @@
     <script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
     <script type="text/javascript" charset="utf-8">
       $(document).ready(function () {
+        window.Batslap.skipIndices([3]);
+
         $('.change').on('click', function () {
           window.Batslap.rtalk('*Hey batman, what are you getting your parents for christ-*');
           window.Batslap.btalk('*My parents are **deeaaaaaaad!!!***');
@@ -183,7 +185,7 @@
         });
 
         $('.remove-text').on('click', function () {
-          window.Batslap.btalk('', 2);
+          window.Batslap.rtalk('', 2);
         });
       });
     </script>
