@@ -39,3 +39,6 @@ Then open dist/index.html
 ### Deploy to github pages
 
 `gulp ghdeploy`
+
+
+Just what the hell are you up to curlee?  Do i really have to sub prs to contact you?
